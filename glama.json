@@ -1,5 +1,11 @@
 {
+  "name": "hpsilab-mcp-server",
+  "description": "Quantitative stock analysis MCP server providing technical analysis, trading signals and market insights.",
   "maintainers": [
     "haiyunsky"
+  ],
+  "categories": [
+    "finance",
+    "analysis"
   ]
 }
