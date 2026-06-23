@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
+uv.lock
 .env
+.env.*
+test.py

@@ -1,8 +1,113 @@
-# HPSILab MCP Server
+# HPSILab MCP
 
-Quantitative stock analysis MCP server powered by AI prediction, options analytics, volatility intelligence, Monte Carlo simulation, and strategy backtesting.
+[![Website](https://img.shields.io/badge/HPSILab-hpsilab.com-orange)](https://hpsilab.com)
 
-HPSILab MCP Server enables AI assistants such as Cursor, Claude Desktop, Cline, Roo Code, and other MCP-compatible clients to perform institutional-style quantitative stock analysis.
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+
+[![MCP](https://img.shields.io/badge/MCP-Compatible-blue)](https://modelcontextprotocol.io)
+
+Institutional-grade quantitative stock analysis for AI assistants.
+
+**Official Remote MCP Endpoint**
+
+```text
+https://hpsilab.com/mcp
+```
+
+HPSILab combines AI prediction, options analytics, volatility intelligence, Monte Carlo simulation, and strategy backtesting into a unified MCP experience.
+
+Supported by HPSILab's quantitative research platform and available as both a hosted Remote MCP service and an open-source self-hosted MCP server.
+
+---
+
+## 🚀 Quick Start
+
+## Which Option Should I Use?
+
+| Option                                 | Setup Time  | Best For      |
+| -------------------------------------- | ----------- | ------------- |
+| Remote MCP (`https://hpsilab.com/mcp`) | Instant     | Most users    |
+| Self-Hosted MCP Server                 | 2-3 minutes | Developers    |
+| Enterprise Deployment                  | Custom      | Organizations |
+
+### Option 1 — Official Remote MCP Service (Recommended)
+
+Connect directly to the official HPSILab MCP endpoint:
+
+```text
+https://hpsilab.com/mcp
+```
+
+Benefits:
+
+* No installation required
+* Always up to date
+* Managed infrastructure
+* Fastest setup experience
+* Works anywhere MCP is supported
+
+### Option 2 — Open Source Self-Hosted MCP Server
+
+Clone the repository:
+
+```bash
+git clone https://github.com/haiyunsky/hpsilab-mcp-server.git
+cd hpsilab-mcp-server
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start the server:
+
+```bash
+python src/server.py
+```
+
+The server runs using MCP stdio transport and connects to HPSILab quantitative APIs.
+
+Ideal for:
+
+* Developers
+* Auditing source code
+* Enterprise deployments
+* Internal AI platforms
+* Custom MCP workflows
+
+---
+
+## Architecture
+
+### Remote MCP
+
+```text
+AI Client
+    ↓
+https://hpsilab.com/mcp
+    ↓
+HPSILab Quant Platform
+```
+
+### Self-Hosted MCP
+
+```text
+AI Client
+    ↓
+hpsilab-mcp-server
+    ↓
+HPSILab Quant API
+    ↓
+HPSILab Quant Platform
+```
+
+---
+
+## Keywords
+
+MCP Server, Stock Analysis, Quantitative Finance, AI Trading, Options Analytics, Volatility Analysis, Monte Carlo Simulation, Backtesting, Claude MCP, Cursor MCP, ChatGPT MCP
 
 ---
 
@@ -24,6 +129,8 @@ HPSILab MCP Server enables AI assistants such as Cursor, Claude Desktop, Cline, 
 
 * Cursor
 * Claude Desktop
+* Claude Code
+* ChatGPT Agents
 * Cline
 * Roo Code
 * Windsurf
@@ -32,40 +139,9 @@ HPSILab MCP Server enables AI assistants such as Cursor, Claude Desktop, Cline, 
 
 ---
 
-## Installation
-
-Clone the repository:
-
-```bash
-git clone https://github.com/haiyunsky/hpsilab-mcp-server.git
-cd hpsilab-mcp-server
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Running the Server
-
-Start the MCP server:
-
-```bash
-python src/server.py
-```
-
-The server runs using the MCP stdio transport and waits for MCP client connections.
-
----
-
 ## MCP Client Configuration
 
 ### Cursor
-
-Add the following to your Cursor MCP configuration:
 
 ```json
 {
@@ -79,8 +155,6 @@ Add the following to your Cursor MCP configuration:
 ```
 
 ### Claude Desktop
-
-Add the following to your Claude Desktop MCP configuration:
 
 ```json
 {
@@ -99,23 +173,68 @@ Add the following to your Claude Desktop MCP configuration:
 
 ### analyze_stock
 
-Performs quantitative stock analysis using multiple models and market intelligence systems.
+Performs institutional-style quantitative stock analysis using multiple models and market intelligence systems.
 
 #### Parameters
 
-| Name   | Type   | Description                                           |
-| ------ | ------ | ----------------------------------------------------- |
-| symbol | string | Stock ticker symbol (e.g. NVDA, AAPL, TSLA, SPY, QQQ) |
+| Name   | Type   | Description                                            |
+| ------ | ------ | ------------------------------------------------------ |
+| symbol | string | Stock ticker symbol (NVDA, AAPL, TSLA, SPY, QQQ, etc.) |
 
-#### Models Used
+---
 
-The analysis may incorporate:
+## Quantitative Models
 
-* AI Prediction Engine
-* Volatility Radar
-* Option Pressure Map
-* Monte Carlo Simulation
-* Strategy Backtesting Engine
+### AI Prediction Engine
+
+Predicts directional probability using multiple machine learning models.
+
+Outputs may include:
+
+* Probability of upward move
+* Model consensus
+* Risk indicators
+* Confidence scoring
+
+### IV Radar
+
+Analyzes:
+
+* ATM Implied Volatility
+* IV Rank
+* IV Percentile
+* Risk Reversal
+* Volatility Regime
+
+### Option Pressure Map
+
+Analyzes:
+
+* Max Pain
+* Gamma Wall
+* Expected Move
+* Squeeze Targets
+* Expiry Pressure Zones
+
+### Monte Carlo Simulation
+
+Projects probabilistic future price paths:
+
+* Probability ranges
+* Expected outcomes
+* Support levels
+* Resistance levels
+* Volatility-adjusted scenarios
+
+### Strategy Backtesting Engine
+
+Evaluates:
+
+* Total Return
+* Sharpe Ratio
+* Maximum Drawdown
+* Win Rate
+* Profit/Loss Ratio
 
 ---
 
@@ -150,94 +269,46 @@ analyze_stock("NVDA")
 
 ---
 
-## Response Fields
-
-| Field            | Type    | Description                        |
-| ---------------- | ------- | ---------------------------------- |
-| symbol           | string  | Stock ticker                       |
-| signal           | string  | Bullish, Bearish, or Neutral       |
-| confidence_score | integer | Direction confidence score (0-100) |
-| bullish_factors  | array   | Positive supporting signals        |
-| bearish_factors  | array   | Negative supporting signals        |
-| summary          | string  | Human-readable analysis summary    |
-
----
-
-## Quantitative Models
-
-### AI Prediction
-
-Predicts next-day direction probability using multiple machine learning models.
-
-Outputs may include:
-
-* Probability of upward move
-* Model consensus
-* Suggested risk levels
-* Sentiment indicators
-
-### IV Radar
-
-Analyzes option market volatility metrics including:
-
-* ATM Implied Volatility
-* IV Rank
-* IV Percentile
-* Risk Reversal
-* Volatility Regime
-
-### Option Pressure Map
-
-Analyzes dealer positioning and option flow:
-
-* Max Pain
-* Gamma Wall
-* Expected Move
-* Squeeze Targets
-* Expiry Pressure Zones
-
-### Monte Carlo Simulation
-
-Projects probabilistic future price paths:
-
-* Probability ranges
-* Expected outcomes
-* Support levels
-* Resistance levels
-* Volatility-adjusted scenarios
-
-### Strategy Backtesting
-
-Evaluates historical strategy performance:
-
-* Total Return
-* Sharpe Ratio
-* Maximum Drawdown
-* Win Rate
-* Profit/Loss Ratio
-
----
-
 ## Use Cases
 
-Examples:
-
-* Analyze NVDA directional bias
-* Evaluate bullish vs bearish evidence
+* Analyze directional bias for any stock
+* Evaluate bullish versus bearish evidence
 * Study options market positioning
 * Estimate volatility risk
 * Explore probabilistic price scenarios
-* Generate quantitative market insights
+* Generate institutional-style market insights
 
 ---
 
-## Hosted Platform
+## Why HPSILab?
 
-HPSILab provides quantitative market research and analytics services.
+Most stock analysis tools focus on a single signal.
 
-Website:
+HPSILab combines:
 
+* AI forecasts
+* Options positioning
+* Volatility analytics
+* Quantitative simulations
+* Historical strategy validation
+
+to generate a unified market view with transparent supporting evidence.
+
+---
+
+## Official HPSILab Services
+
+### Website
+
+```text
 https://hpsilab.com
+```
+
+### Remote MCP Endpoint
+
+```text
+https://hpsilab.com/mcp
+```
 
 ---
 
