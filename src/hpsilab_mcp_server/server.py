@@ -277,31 +277,48 @@ def get_equity_curves(symbol: str) -> dict:
 @mcp.tool()
 def generate_stock_research_report(symbol: str) -> dict:
     """
-    Generate a structured, institutional-style research report for a stock.
+    Generate a structured, institutional-style markdown research report for
+    a single stock, covering all major quantitative signal sources.
 
-    The report synthesizes AI prediction, IV analysis, options positioning,
-    Monte Carlo projections, and backtesting into a formatted markdown document
-    suitable for sharing with investors or stakeholders.
+    The report is divided into six sections:
+      1. Executive Summary   — bull/bear verdict, confidence score, one-line thesis
+      2. AI Prediction       — ensemble model votes, up-probability, regime
+      3. Volatility Analysis — ATM IV, IV rank, vol regime, risk reversal
+      4. Options Positioning — max pain, gamma wall, expected move, squeeze targets
+      5. Monte Carlo Outlook — 30-day price distribution, 90 %/68 % confidence ranges
+      6. Strategy Backtests  — Sharpe, max drawdown, win rate across quant strategies
+
+    Output is a complete markdown string (~800–1200 words) ready to render or share.
+    Response latency is ~10–20 s due to full multi-model data aggregation.
 
     Use this tool when:
-    - A user asks for a "report", "write-up", or "research note" on a stock.
-    - You want a pre-formatted narrative that combines all signal sources.
-    - You need a document for archiving or distribution, not just raw data.
+    - A user asks for a "report", "write-up", "research note", or "deep dive".
+    - You want a pre-formatted narrative combining all signal sources in one document.
+    - You need output suitable for archiving, PDF export, or investor communication.
 
-    Prefer analyze_stock when you only need structured JSON for programmatic
-    use.  This tool returns a human-readable narrative.
+    Do NOT use this tool when:
+    - You only need a quick directional verdict → use analyze_stock instead.
+    - You need a specific data dimension (IV, Monte Carlo, etc.) → use the
+      dedicated sub-tool (get_iv_radar, get_monte_carlo, etc.) for lower latency.
 
     Parameters
     ----------
     symbol : str
         Exchange ticker in uppercase, e.g. "NVDA", "TSLA", "SPY".
+        Do NOT pass company names — use official tickers only.
 
     Returns
     -------
     dict with keys:
-        symbol  : str — normalized ticker
-        report  : str — full markdown research report
-        generated_at: str — ISO 8601 timestamp
+        symbol       : str — normalized ticker
+        report       : str — full markdown report (~800–1200 words, 6 sections)
+        generated_at : str — ISO 8601 generation timestamp
+
+    Notes
+    -----
+    - Requires a valid HPSILAB_API_KEY.
+    - Free-tier keys are limited to a predefined ticker set.
+    - For programmatic use, prefer analyze_stock which returns structured JSON.
     """
     return _get(f"stock_research_report/{symbol.upper()}")
 
