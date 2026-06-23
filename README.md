@@ -1,7 +1,8 @@
 # HPSILab MCP Server
 
+Institutional-grade quantitative stock analysis for AI agents via MCP.
+
 Model Context Protocol (MCP) server for quantitative stock analysis powered by HPSI Lab.
-Institutional-grade quantitative analysis for AI agents via MCP.
 
 ## Overview
 
@@ -14,7 +15,6 @@ The server exposes stock analysis tools while abstracting the underlying researc
 * Quantitative stock analysis
 * Bullish / bearish factor breakdown
 * Directional scoring
-* Portfolio risk evaluation
 * MCP-compatible tool interface
 * Local and remote deployment
 
@@ -117,26 +117,6 @@ Example Output:
 }
 ```
 
-### compare_stocks
-
-Compare multiple securities.
-
-Input:
-
-```json
-{
-  "symbols": [
-    "AAPL",
-    "MSFT",
-    "NVDA"
-  ]
-}
-```
-
-### portfolio_risk
-
-Evaluate portfolio exposure and risk characteristics.
-
 ## Reference Implementation
 
 ```python
@@ -144,12 +124,19 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("HPSILab MCP Server")
 
+
 @mcp.tool()
 async def analyze_stock(symbol: str):
+    """
+    Analyze a stock using HPSI Lab Quant Engine.
+    """
+
+    # Production implementation calls hosted services.
     return {
         "symbol": symbol,
         "status": "success"
     }
+
 
 if __name__ == "__main__":
     mcp.run()
@@ -177,6 +164,22 @@ https://hpsilab.com/mcp
 
 The production service may provide additional quantitative models, research signals, and datasets not included in this repository.
 
+## Open Source vs Production
+
+This repository includes:
+
+* MCP server definitions
+* Tool schemas
+* Reference implementations
+* Development examples
+
+The production HPSI Lab platform additionally includes:
+
+* Proprietary quantitative models
+* Institutional research signals
+* Commercial datasets
+* Advanced risk analytics
+
 ## Disclaimer
 
 This repository contains MCP server definitions, tool schemas, transport examples, and reference implementations.
@@ -185,7 +188,6 @@ Proprietary quantitative models, research infrastructure, and commercial dataset
 
 ## License
 
-MIT License
+MIT License.
 
-```
-```
+See LICENSE for details.
