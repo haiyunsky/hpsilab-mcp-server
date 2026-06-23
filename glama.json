@@ -1,13 +1,25 @@
 {
   "name": "hpsilab-mcp-server",
-  "description": "Institutional-grade quantitative stock analysis MCP server.",
+  "description": "8 institutional-grade quantitative finance tools for AI agents: stock analysis, implied volatility radar, options pressure mapping, Monte Carlo simulation, AI directional prediction, strategy backtesting, research report generation, and chart visualization.",
   "repository": "https://github.com/haiyunsky/hpsilab-mcp-server",
   "homepage": "https://hpsilab.com",
   "license": "MIT",
-  "maintainers": ["haiyunsky"],
+  "maintainers": [
+    "haiyunsky"
+  ],
   "categories": [
     "finance",
     "analysis",
     "trading"
+  ],
+  "tags": [
+    "stock-analysis",
+    "options-analytics",
+    "implied-volatility",
+    "monte-carlo",
+    "quantitative-finance",
+    "backtesting",
+    "ai-prediction",
+    "machine-learning"
   ]
 }
