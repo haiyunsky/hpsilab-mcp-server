@@ -8,7 +8,7 @@
 
 ⭐ If you find HPSILab useful, please star the repository.
 
-**8 institutional-grade quantitative finance tools for AI agents and MCP clients.**
+**8-tool MCP server for US equity options intelligence: real-time IV radar, Monte Carlo price simulation, options pressure maps, equity curve backtesting, and quantum ML prediction signals for AI-driven trading research.**
 
 Analyze stocks using AI forecasting, options positioning, implied volatility intelligence, Monte Carlo simulation, and strategy backtesting — each exposed as a dedicated MCP tool.
 
