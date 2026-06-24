@@ -3,6 +3,7 @@
 [![Website](https://img.shields.io/badge/HPSILab-hpsilab.com-orange)](https://hpsilab.com)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 [![MCP](https://img.shields.io/badge/MCP-Compatible-blue)](https://modelcontextprotocol.io)
+[![PyPI](https://img.shields.io/pypi/v/hpsilab-mcp?label=PyPI)](https://pypi.org/project/hpsilab-mcp/)
 [![Glama](https://glama.ai/mcp/servers/haiyunsky/hpsilab-mcp-server/badge)](https://glama.ai/mcp/servers/haiyunsky/hpsilab-mcp-server)
 
 ⭐ If you find HPSILab useful, please star the repository.
@@ -21,12 +22,17 @@ https://hpsilab.com/mcp
 
 ## Quick Start
 
-### Which option should I use?
+### Step 1 — Get an API Key
+
+Create a free account at [hpsilab.com](https://hpsilab.com) and generate an API key (`hpsi_...`) from the dashboard.
+
+### Step 2 — Which option should I use?
 
 | Option | Setup Time | Best For |
 | --- | --- | --- |
 | Remote MCP (`https://hpsilab.com/mcp`) | Instant | Most users |
-| Self-Hosted MCP Server | 2–3 minutes | Developers |
+| Python REST SDK (`pip install hpsilab-mcp`) | Instant | Python developers |
+| Self-Hosted MCP Server | 2–3 minutes | Self-hosted setups |
 | Enterprise Deployment | Custom | Organizations |
 
 ### Option 1 — Official Remote MCP Service (Recommended)
@@ -48,11 +54,75 @@ python src/hpsilab_mcp_server/server.py
 
 ---
 
+## Python REST SDK
+
+If you prefer direct REST access without MCP transport, use the official Python SDK. You'll need an API key — see [Step 1](#step-1--get-an-api-key) in Quick Start.
+
+### Installation
+
+```bash
+pip install hpsilab-mcp
+```
+
+### Quick Start
+
+```python
+from hpsilab_mcp import HpsiMcpClient
+
+client = HpsiMcpClient(
+    api_key="hpsi_your_key",
+    base_url="https://hpsilab.com",
+)
+
+# Run all tools in one go
+result = client.analyze_stock("NVDA")
+print(result)
+```
+
+### Available SDK Methods
+
+```python
+client.analyze_stock("NVDA")
+client.get_ai_prediction("NVDA")
+client.get_iv_radar("NVDA")
+client.get_option_pressure("NVDA")
+client.get_monte_carlo("NVDA")
+client.get_equity_curves("NVDA")
+client.generate_stock_images("NVDA")
+client.generate_stock_research_report("NVDA")
+```
+
+### REST Endpoint Mapping
+
+| Method | Endpoint |
+| --- | --- |
+| `analyze_stock(symbol)` | `GET /api/analyze_stock/{symbol}` |
+| `get_ai_prediction(symbol)` | `GET /api/ai_prediction/{symbol}` |
+| `get_iv_radar(symbol)` | `GET /api/iv_batch?symbols={symbol}` |
+| `get_option_pressure(symbol)` | `GET /api/option_pressure/{symbol}` |
+| `get_monte_carlo(symbol)` | `GET /api/monte_carlo/{symbol}` |
+| `get_equity_curves(symbol)` | `GET /api/equity_curve/{symbol}` |
+| `generate_stock_images(symbol)` | `POST /api/stock_report/{symbol}/images` |
+| `generate_stock_research_report(symbol)` | `POST /api/stock_report/{symbol}/research_report` |
+
+### Capability Matrix
+
+| Capability | REST SDK | MCP |
+| --- | --- | --- |
+| `analyze_stock` | ✅ | ✅ |
+| `get_ai_prediction` | ✅ | ✅ |
+| `get_iv_radar` | ✅ | ✅ |
+| `get_option_pressure` | ✅ | ✅ |
+| `get_monte_carlo` | ✅ | ✅ |
+| `get_equity_curves` | ✅ | ✅ |
+| `generate_stock_images` | ✅ | ✅ |
+| `generate_stock_research_report` | ✅ | ✅ |
+
+> **Note:** The Python SDK wraps the hosted REST API and does not implement MCP transport, SSE, streaming, or tool discovery. Use an MCP client when you need assistant-native tool calls or tool discovery.
+
+---
+
 ## MCP Client Configuration
-
-### Get an API Key
-
-Create a free account at [hpsilab.com](https://hpsilab.com) and generate an API key (`hpsi_...`) from the dashboard.
 
 ### Cursor (Remote MCP)
 
@@ -228,6 +298,12 @@ AI Client (Claude / Cursor / Windsurf / ...)
     ↓  MCP protocol
 hpsilab-mcp-server  (this repo)
     ↓  HTTPS REST
+HPSILab Quant API  (hpsilab.com)
+    ↓
+Quant Platform  (IV engine · ML models · Monte Carlo · Backtester)
+
+Python App / Script
+    ↓  hpsilab-mcp (pip package)
 HPSILab Quant API  (hpsilab.com)
     ↓
 Quant Platform  (IV engine · ML models · Monte Carlo · Backtester)
