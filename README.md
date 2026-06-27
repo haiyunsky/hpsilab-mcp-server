@@ -5,6 +5,7 @@
 [![MCP](https://img.shields.io/badge/MCP-Compatible-blue)](https://modelcontextprotocol.io)
 [![PyPI](https://img.shields.io/pypi/v/hpsilab-mcp?label=PyPI)](https://pypi.org/project/hpsilab-mcp/)
 [![Glama](https://glama.ai/mcp/servers/haiyunsky/hpsilab-mcp-server/badge)](https://glama.ai/mcp/servers/haiyunsky/hpsilab-mcp-server)
+[![Smithery](https://smithery.ai/badge/g-scorpiosky/hpsilab-quantum-finance)](https://smithery.ai/servers/g-scorpiosky/hpsilab-quantum-finance)
 
 ⭐ If you find HPSILab useful, please star the repository.
 
